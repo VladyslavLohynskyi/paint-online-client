@@ -11,15 +11,41 @@ function Toolbar() {
   const onChangeFillColor = (e) => {
     toolState.setFillColor(e.target.value);
   };
+  const download = () => {
+    const dataURL = canvasState.canvas.toDataURL();
+    console.log(dataURL);
+    const a = document.createElement("a");
+    a.href = dataURL;
+    a.download = canvasState.sessionid + ".jpg";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
   return (
     <div className="toolbar">
       <button
         className="toolbar__btn brush"
-        onClick={() => toolState.setTool(new Brush(canvasState.canvas))}
+        onClick={() =>
+          toolState.setTool(
+            new Brush(
+              canvasState.canvas,
+              canvasState.socket,
+              canvasState.sessionid
+            )
+          )
+        }
       ></button>
       <button
         className="toolbar__btn rect"
-        onClick={() => toolState.setTool(new Rect(canvasState.canvas))}
+        onClick={() =>
+          toolState.setTool(
+            new Rect(
+              canvasState.canvas,
+              canvasState.socket,
+              canvasState.sessionid
+            )
+          )
+        }
       ></button>
       <button
         className="toolbar__btn circle"
@@ -50,7 +76,12 @@ function Toolbar() {
           canvasState.redo();
         }}
       ></button>
-      <button className="toolbar__btn save"></button>
+      <button
+        className="toolbar__btn save"
+        onClick={() => {
+          download();
+        }}
+      ></button>
     </div>
   );
 }
