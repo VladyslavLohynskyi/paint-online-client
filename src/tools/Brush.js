@@ -44,13 +44,15 @@ export default class Brush extends Tool {
             type: "brush",
             x: e.pageX - e.target.offsetLeft,
             y: e.pageY - e.target.offsetTop,
+            color: this.ctx.strokeStyle,
           },
         })
       );
     }
   }
 
-  static draw(ctx, x, y) {
+  static draw(ctx, x, y, color) {
+    ctx.strokeStyle = color;
     ctx.lineTo(x, y);
     ctx.stroke();
     console.log("draw ");

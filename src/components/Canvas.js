@@ -8,6 +8,9 @@ import { Modal, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Rect from "../tools/Rect";
 import axios from "axios";
+import Eraser from "../tools/Eraser";
+import Circle from "../tools/Circle";
+import Line from "../tools/Line";
 
 const Canvas = observer(() => {
   const canvasRef = useRef();
@@ -79,7 +82,7 @@ const Canvas = observer(() => {
     const ctx = canvasRef.current.getContext("2d");
     switch (figure.type) {
       case "brush":
-        Brush.draw(ctx, figure.x, figure.y);
+        Brush.draw(ctx, figure.x, figure.y, figure.color);
         break;
       case "rect":
         Rect.rectDraw(
@@ -88,6 +91,22 @@ const Canvas = observer(() => {
           figure.y,
           figure.width,
           figure.height,
+          figure.color
+        );
+        break;
+      case "eraser":
+        Eraser.draw(ctx, figure.x, figure.y);
+        break;
+      case "circle":
+        Circle.circleDraw(ctx, figure.x, figure.y, figure.radius, figure.color);
+        break;
+      case "line":
+        Line.lineDraw(
+          ctx,
+          figure.startX,
+          figure.startY,
+          figure.x,
+          figure.y,
           figure.color
         );
         break;
