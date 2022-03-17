@@ -78,27 +78,63 @@ const Canvas = observer(() => {
 
   const drawHandler = (msg) => {
     const figure = msg.figure;
+    let lineWidth, strokeStyle, fillStyle;
 
     const ctx = canvasRef.current.getContext("2d");
     switch (figure.type) {
       case "brush":
-        Brush.draw(ctx, figure.x, figure.y, figure.color);
+        lineWidth = ctx.lineWidth;
+        strokeStyle = ctx.strokeStyle;
+
+        Brush.draw(ctx, figure.x, figure.y, figure.color, figure.lineWidth);
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = strokeStyle;
+
         break;
       case "rect":
+        lineWidth = ctx.lineWidth;
+        strokeStyle = ctx.strokeStyle;
+        fillStyle = ctx.fillStyle;
+        console.log(fillStyle);
         Rect.rectDraw(
           ctx,
           figure.x,
           figure.y,
           figure.width,
           figure.height,
-          figure.color
+          figure.color,
+          figure.lineWidth,
+          figure.strokeColor
         );
+        console.log(fillStyle);
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = strokeStyle;
+        ctx.fillStyle = fillStyle;
         break;
       case "eraser":
-        Eraser.draw(ctx, figure.x, figure.y);
+        lineWidth = ctx.lineWidth;
+        Eraser.draw(ctx, figure.x, figure.y, figure.lineWidth);
+        ctx.lineWidth = lineWidth;
         break;
       case "circle":
-        Circle.circleDraw(ctx, figure.x, figure.y, figure.radius, figure.color);
+        lineWidth = ctx.lineWidth;
+        strokeStyle = ctx.strokeStyle;
+        fillStyle = ctx.fillStyle;
+
+        Circle.circleDraw(
+          ctx,
+          figure.x,
+          figure.y,
+          figure.radius,
+          figure.color,
+          figure.lineWidth,
+          figure.strokeColor
+        );
+
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = strokeStyle;
+        ctx.fillStyle = fillStyle;
+
         break;
       case "line":
         Line.lineDraw(
@@ -107,7 +143,8 @@ const Canvas = observer(() => {
           figure.startY,
           figure.x,
           figure.y,
-          figure.color
+          figure.color,
+          figure.lineWidth
         );
         break;
       case "finish":

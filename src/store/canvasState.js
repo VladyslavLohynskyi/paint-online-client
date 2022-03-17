@@ -7,9 +7,18 @@ class CanvasState {
   undoList = [];
   redoList = [];
   username = "";
+  disableFill = true;
+  disableStroke = false;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  setDisableFill(bool) {
+    this.disableFill = bool;
+  }
+  setDisableStroke(bool) {
+    this.disableStroke = bool;
   }
   setSessionId(sessionid) {
     this.sessionid = sessionid;

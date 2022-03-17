@@ -12,6 +12,7 @@ export default class Line extends Tool {
     this.canvas.onmouseup = this.mouseUpHandler.bind(this);
   }
   mouseUpHandler(e) {
+    console.log(this.ctx.lineWidth);
     this.mouseDown = false;
     this.socket.send(
       JSON.stringify({
@@ -24,6 +25,7 @@ export default class Line extends Tool {
           startX: this.startX,
           startY: this.startY,
           color: this.ctx.strokeStyle,
+          lineWidth: this.ctx.lineWidth,
         },
       })
     );
@@ -58,7 +60,8 @@ export default class Line extends Tool {
       this.ctx.stroke();
     };
   }
-  static lineDraw(ctx, startX, startY, x, y, color) {
+  static lineDraw(ctx, startX, startY, x, y, color, lineWidth) {
+    ctx.lineWidth = lineWidth;
     ctx.strokeStyle = color;
     ctx.beginPath();
 
@@ -66,5 +69,6 @@ export default class Line extends Tool {
 
     ctx.lineTo(x, y);
     ctx.stroke();
+    ctx.beginPath();
   }
 }

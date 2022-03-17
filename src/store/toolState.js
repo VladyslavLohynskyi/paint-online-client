@@ -2,6 +2,9 @@ import { makeAutoObservable } from "mobx";
 
 class ToolState {
   tool = null;
+  fillColor = null;
+  strokeColor = null;
+  lineWidth = 1;
   constructor() {
     makeAutoObservable(this);
   }

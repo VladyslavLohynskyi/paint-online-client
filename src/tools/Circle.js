@@ -23,6 +23,8 @@ export default class Circle extends Tool {
           y: this.centerY,
           radius: this.radius,
           color: this.ctx.fillStyle,
+          lineWidth: this.ctx.lineWidth,
+          strokeColor: this.ctx.strokeStyle,
         },
       })
     );
@@ -60,11 +62,14 @@ export default class Circle extends Tool {
       this.ctx.stroke();
     };
   }
-  static circleDraw(ctx, x, y, radius, color) {
+  static circleDraw(ctx, x, y, radius, color, lineWidth, strokeColor) {
+    ctx.strokeStyle = strokeColor;
+    ctx.lineWidth = lineWidth;
     ctx.fillStyle = color;
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2, true);
     ctx.fill();
     ctx.stroke();
+    ctx.beginPath();
   }
 }

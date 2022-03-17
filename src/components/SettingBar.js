@@ -1,7 +1,9 @@
+import { observer } from "mobx-react-lite";
+import canvasState from "../store/canvasState";
 import toolState from "../store/toolState";
 import "../styles/toolbar.scss";
 
-function SettigBar() {
+const SettigBar = observer(() => {
   return (
     <div className="settingbar">
       <label htmlFor="line-width">Line width</label>
@@ -18,6 +20,7 @@ function SettigBar() {
       />
       <label htmlFor="stroke-color">Stroke color</label>
       <input
+        disabled={canvasState.disableStroke}
         id="stroke-color"
         onChange={(e) => toolState.setStrokeColor(e.target.value)}
         style={{ marginLeft: 10, cursor: "pointer" }}
@@ -25,6 +28,6 @@ function SettigBar() {
       />
     </div>
   );
-}
+});
 
 export default SettigBar;
