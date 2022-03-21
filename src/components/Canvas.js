@@ -48,7 +48,7 @@ const Canvas = observer(() => {
 
   useEffect(() => {
     if (canvasState.username) {
-      const socket = new WebSocket("ws://paint-online-ua.herokuapp.com");
+      const socket = new WebSocket("wss://paint-online-ua.herokuapp.com");
 
       canvasState.setSocket(socket);
 
