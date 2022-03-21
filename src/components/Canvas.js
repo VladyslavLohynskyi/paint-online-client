@@ -21,27 +21,34 @@ const Canvas = observer(() => {
   useEffect(() => {
     canvasState.setCanvas(canvasRef.current);
 
-    axios.get(`http://localhost:5000/image?id=${params.id}`).then((res) => {
-      const ctx = canvasRef.current.getContext("2d");
-      const img = new Image();
-      img.src = res.data;
-      img.onload = () => {
-        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-        ctx.drawImage(
-          img,
-          0,
-          0,
-          canvasRef.current.width,
-          canvasRef.current.height
-        );
-        ctx.stroke();
-      };
-    });
+    axios
+      .get(`https://paint-online-ua.herokuapp.com/image?id=${params.id}`)
+      .then((res) => {
+        const ctx = canvasRef.current.getContext("2d");
+        const img = new Image();
+        img.src = res.data;
+        img.onload = () => {
+          ctx.clearRect(
+            0,
+            0,
+            canvasRef.current.width,
+            canvasRef.current.height
+          );
+          ctx.drawImage(
+            img,
+            0,
+            0,
+            canvasRef.current.width,
+            canvasRef.current.height
+          );
+          ctx.stroke();
+        };
+      });
   }, []);
 
   useEffect(() => {
     if (canvasState.username) {
-      const socket = new WebSocket("ws://localhost:5000");
+      const socket = new WebSocket("ws://paint-online-ua.herokuapp.com");
 
       canvasState.setSocket(socket);
 
@@ -163,7 +170,7 @@ const Canvas = observer(() => {
 
   const mouseUpHandler = () => {
     axios
-      .post(`http://localhost:5000/image?id=${params.id}`, {
+      .post(`https://paint-online-ua.herokuapp.com/image?id=${params.id}`, {
         img: canvasRef.current.toDataURL(),
       })
       .then((res) => console.log(res.data));
