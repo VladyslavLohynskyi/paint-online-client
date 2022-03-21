@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/paint-online-client/static/css/main.85f887ab.css",
+    "main.js": "/paint-online-client/static/js/main.031d3ef4.js",
+    "index.html": "/paint-online-client/index.html",
+    "main.85f887ab.css.map": "/paint-online-client/static/css/main.85f887ab.css.map",
+    "main.031d3ef4.js.map": "/paint-online-client/static/js/main.031d3ef4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.85f887ab.css",
+    "static/js/main.031d3ef4.js"
+  ]
+}
