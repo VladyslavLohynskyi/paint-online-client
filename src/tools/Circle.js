@@ -1,8 +1,8 @@
 import Tool from "./Tool";
 
 export default class Circle extends Tool {
-  constructor(canvas) {
-    super(canvas);
+  constructor(canvas, socket, id) {
+    super(canvas, socket, id);
     this.listen();
   }
   listen() {
@@ -12,6 +12,22 @@ export default class Circle extends Tool {
   }
   mouseUpHandler(e) {
     this.mouseDown = false;
+
+    this.socket.send(
+      JSON.stringify({
+        method: "draw",
+        id: this.id,
+        figure: {
+          type: "circle",
+          x: this.centerX,
+          y: this.centerY,
+          radius: this.radius,
+          color: this.ctx.fillStyle,
+          lineWidth: this.ctx.lineWidth,
+          strokeColor: this.ctx.strokeStyle,
+        },
+      })
+    );
   }
   mouseDownHandler(e) {
     this.mouseDown = true;
@@ -26,11 +42,11 @@ export default class Circle extends Tool {
       let currentY = e.pageY - e.target.offsetTop;
       let currentX = e.pageX - e.target.offsetLeft;
 
-      let centerX = (this.startX + currentX) / 2;
-      let centerY = (this.startY + currentY) / 2;
-      let radius = Math.abs((currentX - this.startX) / 2);
+      this.centerX = (this.startX + currentX) / 2;
+      this.centerY = (this.startY + currentY) / 2;
+      this.radius = Math.abs((currentX - this.startX) / 2);
 
-      this.draw(centerX, centerY, radius);
+      this.draw(this.centerX, this.centerY, this.radius);
     }
   }
 
@@ -45,5 +61,15 @@ export default class Circle extends Tool {
       this.ctx.fill();
       this.ctx.stroke();
     };
+  }
+  static circleDraw(ctx, x, y, radius, color, lineWidth, strokeColor) {
+    ctx.strokeStyle = strokeColor;
+    ctx.lineWidth = lineWidth;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2, true);
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
   }
 }

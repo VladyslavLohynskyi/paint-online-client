@@ -2,11 +2,33 @@ import { makeAutoObservable } from "mobx";
 
 class CanvasState {
   canvas = null;
+  socket = null;
+  sessionid = null;
   undoList = [];
   redoList = [];
+  username = "";
+  disableFill = true;
+  disableStroke = false;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  setDisableFill(bool) {
+    this.disableFill = bool;
+  }
+  setDisableStroke(bool) {
+    this.disableStroke = bool;
+  }
+  setSessionId(sessionid) {
+    this.sessionid = sessionid;
+  }
+  setSocket(socket) {
+    this.socket = socket;
+  }
+
+  setUsername(username) {
+    this.username = username;
   }
   setCanvas(canvas) {
     this.canvas = canvas;
@@ -18,6 +40,10 @@ class CanvasState {
 
   pushToRedo(data) {
     this.redoList.push(data);
+  }
+
+  popToUndo() {
+    return this.undoList.pop();
   }
 
   undo() {
