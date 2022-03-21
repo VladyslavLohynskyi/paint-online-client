@@ -7,10 +7,10 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/:id" element={<Page />} />
+          <Route path="/paint-online-client/:id" element={<Page />} />
 
           <Route
-            path="/"
+            path="/paint-online-client/"
             element={<Navigate to={`f${(+new Date()).toString(16)}`} />}
           />
         </Routes>
