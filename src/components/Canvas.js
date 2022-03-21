@@ -79,6 +79,7 @@ const Canvas = observer(() => {
   const drawHandler = (msg) => {
     const figure = msg.figure;
     let lineWidth, strokeStyle, fillStyle;
+    canvasState.pushToUndo(canvasRef.current.toDataURL());
 
     const ctx = canvasRef.current.getContext("2d");
     switch (figure.type) {

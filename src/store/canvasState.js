@@ -42,6 +42,10 @@ class CanvasState {
     this.redoList.push(data);
   }
 
+  popToUndo() {
+    return this.undoList.pop();
+  }
+
   undo() {
     const ctx = this.canvas.getContext("2d");
 
