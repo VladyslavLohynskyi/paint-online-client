@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/paint-online-client/static/css/main.85f887ab.css",
-    "main.js": "/paint-online-client/static/js/main.d1b0a5df.js",
+    "main.js": "/paint-online-client/static/js/main.62535d2d.js",
     "index.html": "/paint-online-client/index.html",
     "main.85f887ab.css.map": "/paint-online-client/static/css/main.85f887ab.css.map",
-    "main.d1b0a5df.js.map": "/paint-online-client/static/js/main.d1b0a5df.js.map"
+    "main.62535d2d.js.map": "/paint-online-client/static/js/main.62535d2d.js.map"
   },
   "entrypoints": [
     "static/css/main.85f887ab.css",
-    "static/js/main.d1b0a5df.js"
+    "static/js/main.62535d2d.js"
   ]
 }
